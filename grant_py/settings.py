@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework',
     'bootstrap4',
+    'pyuploadcare.dj',
     'tinymce',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -62,6 +63,10 @@ REST_FRAMEWORK={
     'DEFAULT_AUTHENTICATION_CLASSES':(
         'rest_framework.authentication.TokenAuthentication',
     )
+}
+UPLOADCARE = {
+    'pub_key': 'b3b631fd1c4393d31795',
+    'secret': '787678858a63d855993d',
 }
 
 ROOT_URLCONF = 'grant_py.urls'
