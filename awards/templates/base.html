@@ -1,0 +1,32 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='utf-8'>
+  {% if title %}
+  <title>{{title}}</title>
+  {% else %}
+  <title>Grant_py</title>
+  {% endif %}
+
+  {% block styles %}
+    {% bootstrap_css %}    
+    <script src="https://kit.fontawesome.com/8311960bd4.js" crossorigin="anonymous"></script>
+  {% endblock styles %}
+
+  </head>
+  <body>
+  {% include 'navbar.html' %}
+
+  {% block content %}
+  {% endblock content %}
+
+  {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajx/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>UPLOADCARE_PUBLIC_KEY = "YOUR_PUBLIC_KEY";</script>
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+    {% bootstrap_javascript %}
+  {% endblock scripts %}
+  </body>
+</html>
