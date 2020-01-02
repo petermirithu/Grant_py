@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block styles %}
+  {{block.super}}    
+{% endblock styles %}
+
+{% block content %}
+  <div class="container-fluid"> 
+    <h1 class="text-center jumbotron">{{request.user|title}}'s Profile Page.</h1>
+    <div class="row">
+      <div class="col-md-6">               
+        {% if user.first_name %}
+        <h4>Name: "{{user.first_name}} {{user.last_name}}"</h4>
+        {% else %}
+        <h4>Username: "{{user.username}}"</h4>
+        {% endif %}
+        <hr>
+        <h5><b><u>Bio</u></b></h5>
+          {% if user.profile.bio %}
+          <p><i>{{user.profile.bio}}</i></p>
+          {% else %}
+          <p>........................</p>
+          {% endif %}
+          <hr>
+        <h5><b>Find me via:</b></h5>        
+          <p><i class="fas fa-envelope"></i>: <i>{{user.email}}</i></p>                      
+          {% if user.profile.contact %}
+          <p><i class="fas fa-phone-square-alt"></i>: <i>{{user.profile.contact}}</i></p>
+          {% else %}
+          <p><i class="fas fa-phone-square-alt"></i>: ....</p>
+          {% endif %}
+          {% if user.profile.git_name %}
+          <p><i class="fab fa-github"></i>: <i>{{user.profile.git_name}}</i></p>
+          {% else %}
+          <p><i class="fab fa-github"></i>: ....</p>
+          {% endif %}
+      </div>  
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6">
+            <a href="/update/profile/" class="btn btn-outline-success">Update Profile</a>    
+            <h2>Overal Rating</h2>                    
+          </div>
+          <div class="col-md-6">
+            {% if user.profile.profile_pic %}
+              <img class="rounded-circle"src="{{user.profile.profile_pic.cdn_url}}" width="250px" height="250px" alt="Profile photo">
+            {% else %}
+              <img class="rounded-circle"src="https://cdn4.iconfinder.com/data/icons/human-user-business-person-avatars/100/23A-1User-512.png" width="250px" height="250px" alt="Profile photo">
+            {% endif %}
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+{% endblock content %}
