@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block content %}  
+<div class="container">
+  <h1 class="jumbotron text-center">{{post.title}}</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <a href="/profile/{{post.posted_by}}"><h4><b><i>{{post.posted_by}}</i></b></h4></a>
+      <img src="{{post.landing_page_pic.cdn_url}}" width="500px" heigth="400px" alt="{{post.title}}">
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-capitalize">{{post.title}}</div>
+        <div class="card-body">
+          <p><b>Description:</b> {{post.description}}</p>
+        </div>  
+        <div class="card-footer">
+          <p>Live Link: <a href="{{post.live_link}}">{{post.title}}</a></p>          
+          <p>Posted By: {{post.posted_by}}</p>
+          <p>Posted On: {{post.posted_on}}</p>
+        </div>                
+      </div>
+      <hr>
+      {% if request.user == post.posted_by %}
+        <a href="/update_post/{{post.id}}" class="btn btn-outline-primary">Update Post</a>
+        <a href="" class="btn btn-outline-danger">Delete Post</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
