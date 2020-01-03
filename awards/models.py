@@ -13,6 +13,68 @@ class profile(models.Model):
   git_name=models.CharField(max_length=100,blank=True)
   
   def __str__(self):
-    return self.profile_pic
+    return self.user.username
+
+  def save_profile(self):
+    '''
+    function that saves user's data to profile table
+    '''
+    self.save()
+
+
+class projo_post(models.Model):
+  '''
+  class that defines how projects are going to be stored
+  '''
+  title=models.CharField(max_length=100)
+  landing_page_pic=ImageField(blank=True,manual_crop='')
+  live_link=models.CharField(max_length=1000)
+  description=models.TextField(max_length=2000)  
+  posted_by=models.ForeignKey(User, on_delete=models.CASCADE)
+  posted_on=models.DateField(auto_now_add=True)
+
+  class Meta:
+    ordering=['posted_on']
+
+  def __str__(self):
+      return self.title
+
+  def save_post(self):
+    '''
+    function saves projects posted
+    '''
+    self.save()
+
+  def delete_post(self):
+    '''
+    function that deletes a project
+    '''
+    self.delete()
+
+  @classmethod        
+  def get_all_posts(cls):
+    '''
+    function that gets all posts from the database
+    '''
+    posts=cls.objects.order_by('-id')
+    return posts
+
+  @classmethod
+  def get_single_post(cls,post_id):
+    '''
+    function that gets a single post
+    '''
+    post=cls.objects.get(pk=post_id)
+    return post
+
+  @classmethod
+  def get_user_posts(cls, user_id):
+    '''
+    function that gets a user's posts
+    '''
+    posts=cls.objects.filter(posted_by__id__contains=user_id).order_by('-id')
+    return posts
   
+
+
 
