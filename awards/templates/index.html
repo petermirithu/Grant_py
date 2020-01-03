@@ -4,9 +4,25 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="jumbotron">WELCOME TO GRANT_PY.</h1>
-
-  <h2>Footer<h2>
-  <p>Instagram</p>
+  <h1 class="jumbotron text-center">WELCOME TO GRANT_PY.</h1>  
+  <div class="row">
+    <div class="col-md-6">
+      {% for post in posts %}
+      <div class="card">
+        <a href="/profile/{{post.posted_by}}"><h4><b><i>{{post.posted_by}}</i></b></h4></a>
+        <div class="body">
+          <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="400px" heigth="250px" alt="{{post.title}}"></a>
+          <p>{{post.description|title|truncatechars:70}}</p>  
+          <a class="btn btn-outline-info">Rate</a>
+          <a class="btn btn-outline-info">Reviews</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>  
+    <div class="col-md-6">
+      <h3 class="text-center text-danger">Trending Projects</h3>
+      <hr>
+    </div>
+  </div>
 </div>  
 {% endblock content %}
