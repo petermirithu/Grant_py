@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from .forms import UpdateuserForm,UpdateprofileForm,ProjectPostForm
-from .models import profile,projo_post
-from django.shortcuts import get_object_or_404
+from .forms import UpdateuserForm,UpdateprofileForm,ProjectPostForm,reviewForm
+from .models import profile,projo_post,reviews
+from django.shortcuts import get_object_or_404,HttpResponse
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+import json
+
 
 def home(request):
   '''
@@ -106,7 +109,31 @@ def single_post(request,post_id):
   '''
   post=projo_post.get_single_post(post_id)
   title=post.title
-  return render(request, 'single_post.html',{"title":title,"post":post})
+  form=reviewForm()
+  projo_reviews=reviews.project_reviews(post_id)
+  return render(request, 'single_post.html',{"title":title,"post":post,"form":form,"reviews":projo_reviews})
+
+@login_required(login_url='/accounts/login/')  
+def add_review(request,projo_id):
+  '''
+  view function that saves a review for a project to the database
+  '''
+  if request.method=='POST':
+    review_form=reviewForm(request.POST)
+    project=projo_post.get_single_post(projo_id)
+    if review_form.is_valid():
+      review=review_form.save(commit=False)
+      review.posted_by=request.user
+      review.projo_id=project
+      review.save()
+      data={'success': 'Successfully added you review...'}
+      return JsonResponse(data)
+
+
+
+    
+
+
 
 
 

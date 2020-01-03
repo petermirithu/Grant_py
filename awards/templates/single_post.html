@@ -30,4 +30,34 @@
     </div>
   </div>
 </div>
+<hr>
+<div class="container-fluid">  
+  <h1><u>Reviews</u></h1>
+  <div class="row">    
+    <div class="col-md-4">      
+      <form action="/ajax/review/{{post.id}}" method="post" enctype="mulitpart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}      
+        <div class='form-group'>
+          <input type="submit" class="btn btn-outline-danger" value="Post">
+        </div>
+      </form>
+    </div>
+    <div class="col-md-8">
+      {% for review in reviews %}
+        <div class="card" style="width:650px">
+          <p>{{review.body}}</p>
+          <p><small><b>Posted By:</b>{{review.posted_by}} <b>Posted On:</b>{{review.posted_on}}</small></p>                                                  
+        </div>
+        <br>
+      {% endfor %}        
+    </div>
+  </div>
+</div>
 {% endblock content %}
+
+{% block scripts %}
+  {{block.super}}
+  <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
+{% endblock scripts %}
+

@@ -74,7 +74,30 @@ class projo_post(models.Model):
     '''
     posts=cls.objects.filter(posted_by__id__contains=user_id).order_by('-id')
     return posts
+
+class reviews(models.Model):
+  '''
+  class that defines how comments achitecture shall look like
+  '''
+  body=models.CharField(max_length=1000)
+  projo_id=models.ForeignKey(projo_post, on_delete=models.CASCADE)
+  posted_by=models.ForeignKey(User, on_delete=models.CASCADE)
+  posted_on=models.DateTimeField(auto_now_add=True)
+
+  def __str__(self):
+      return self.body
+
+  @classmethod
+  def project_reviews(cls,projo_id):
+    '''
+    function that gets all reviews related to a project
+    '''
+    reviews=cls.objects.filter(projo_id__id__contains=projo_id)
+    return reviews
+
+
   
+
 
 
 

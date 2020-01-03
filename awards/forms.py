@@ -1,5 +1,5 @@
 from django import forms
-from .models import profile,projo_post
+from .models import profile,projo_post,reviews
 from django.contrib.auth.models import User
 
 class UpdateprofileForm(forms.ModelForm):
@@ -25,4 +25,12 @@ class ProjectPostForm(forms.ModelForm):
   class Meta:
     model=projo_post
     exclude=['posted_by','posted_on']  
+    
+class reviewForm(forms.ModelForm):
+  '''
+  class that defines how the review form shall look like
+  '''
+  class Meta:
+    model=reviews
+    fields=['body']
     
