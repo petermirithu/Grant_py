@@ -24,6 +24,18 @@
   <br>
 
   {% block scripts %}
+  <script>
+  function display_form() {
+      var search = document.getElementById("searchform");
+      var btn = document.getElementById("display_btn");
+      if (search.style.display === "none") {
+        search.style.display = "block";
+        btn.style.display = "none";
+      } else {
+        search.style.display = "none";
+      }
+    }
+    </script>
     <script src="https://ajax.googleapis.com/ajx/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>UPLOADCARE_PUBLIC_KEY = "YOUR_PUBLIC_KEY";</script>
     <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
