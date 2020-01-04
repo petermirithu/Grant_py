@@ -2,19 +2,40 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from .forms import UpdateuserForm,UpdateprofileForm,ProjectPostForm,reviewForm
-from .models import profile,projo_post,reviews
+from .models import profile,projo_post,reviews,preference
 from django.shortcuts import get_object_or_404,HttpResponse
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 import json
+import datetime as dt
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def home(request):
   '''
   view function to render the landing page
   '''
+  date=dt.date.today()
   posts=projo_post.get_all_posts()
-  return render(request,'index.html',{"posts":posts})
+  winner=projo_post.winner_project()
+  desi=winner.design
+  usabi=winner.usability
+  conte=winner.content
+  total=winner.total
+
+  perce_desi=(desi/100)*total
+  perce_usabi=(usabi/100)*total
+  perce_conte=(conte/100)*total
+
+  context={
+    'posts':posts,
+    'winner':winner,
+    'date':date,
+    'rate_desi':perce_desi,
+    'rate_usabi':perce_usabi,
+    'rate_conte':perce_conte,
+  }
+  return render(request,'index.html',context)
 
 @login_required(login_url='/accounts/login/')
 def logout_request(request):
@@ -31,6 +52,11 @@ def user_profile(request):
   '''
   title=request.user
   posts=projo_post.get_user_posts(request.user.id)
+  for post in posts:
+    post.design=(post.design/100)*post.total
+    post.usability=(post.usability/100)*post.total
+    post.content=(post.content/100)*post.total
+    
   return render(request, 'profile.html',{"title":title,"posts":posts})
 
 @login_required(login_url='/accounts/login/')  
@@ -38,6 +64,11 @@ def other_user_profile(request,username):
   person=User.objects.get(username=username)
   title=username
   posts=projo_post.get_user_posts(person.id)
+  for post in posts:
+    post.design=(post.design/100)*post.total
+    post.usability=(post.usability/100)*post.total
+    post.content=(post.content/100)*post.total
+    
   return render(request, 'others_profile.html',{"person":person,"title":title,"posts":posts})
 
 @login_required(login_url='/accounts/login/')  
@@ -111,7 +142,16 @@ def single_post(request,post_id):
   title=post.title
   form=reviewForm()
   projo_reviews=reviews.project_reviews(post_id)
-  return render(request, 'single_post.html',{"title":title,"post":post,"form":form,"reviews":projo_reviews})
+
+  desi=post.design
+  usabi=post.usability
+  conte=post.content
+  total=post.total
+
+  rate_desi=(desi/100)*total
+  rate_usabi=(usabi/100)*total
+  rate_conte=(conte/100)*total
+  return render(request, 'single_post.html',{"title":title,"post":post,"form":form,"reviews":projo_reviews,'rate_desi':rate_desi,'rate_usabi':rate_usabi,'rate_conte':rate_conte})
 
 @login_required(login_url='/accounts/login/')  
 def add_review(request,projo_id):
@@ -129,14 +169,58 @@ def add_review(request,projo_id):
       data={'success': 'Successfully added you review...'}
       return JsonResponse(data)
 
+@login_required(login_url='/accounts/login/')  
+def rate(request,post_id,rated):
+  '''
+  view function that helps in rating a post
+  '''
+  if request.method == "POST":      
+    design = request.POST.get("design", None)
+    usability = request.POST.get("usability", None)
+    content = request.POST.get("content", None)    
+    project=get_object_or_404(projo_post,id=post_id)
+        
+    try:                  
+      obj_post=preference.objects.get(user=request.user,post=project)                   
+      design_value=obj_post.design
+      usability_value=obj_post.usability
+      content_value=obj_post.content
 
+      if design_value and usability_value and content_value == int(rated):
+        message="you have aleady rated this project"
+        project=get_object_or_404(projo_post,id=post_id)
+        return redirect('single_post',project.id,{"message":message})              
 
-    
+    except preference.DoesNotExist:
+      rater=preference()
+      rater.user=request.user
+      rater.post=project
+      rater.design=int(rated)
+      rater.usability=int(rated)
+      rater.content=int(rated)
+      
+      project.design +=int(design)
+      project.usability +=int(usability)
+      project.content +=int(content)
+      rate_sum=int(design)+int(usability)+int(content)
+      project.total+=rate_sum
 
+      rater.save()
+      project.save() 
+
+      return redirect('single_post',project.id)
+  
 
 
 
 
 
   
+
+
+
+
+
+
+
 
