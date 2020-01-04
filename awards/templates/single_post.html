@@ -2,13 +2,64 @@
 {% load static %}
 {% load bootstrap4 %}
 
+{% block styles %}
+  {{block.super}}
+  <link rel="stylesheet" href="{% static 'css/single_post.css' %}">
+{% endblock styles %}
+
 {% block content %}  
 <div class="container">
   <h1 class="jumbotron text-center">{{post.title}}</h1>
+  {% if message %}
+    <div class="alert alert-danger">{{mesage}}</div>
+  {% endif %}
   <div class="row">
-    <div class="col-md-6">
-      <a href="/profile/{{post.posted_by}}"><h4><b><i>{{post.posted_by}}</i></b></h4></a>
-      <img src="{{post.landing_page_pic.cdn_url}}" width="500px" heigth="400px" alt="{{post.title}}">
+    <div class="col-md-6">      
+      <img src="{{post.landing_page_pic.cdn_url}}" width="560px" heigth="500px" alt="{{post.title}}">
+      <h5><b>Rating</b></h5>
+      <span style="border:4px solid blue;" class="dot">Design: {{rate_desi|floatformat:1}}%</span> <span style="border:4px solid orange;"class="dot">Usability: {{rate_usabi|floatformat:1}}%</span> <span style="border:4px solid red;" class="dot">Content: {{rate_conte|floatformat:1}}%</span> <span style="border:4px solid violet;"class="dot">Grand Total:{{post.total}}</span>      
+      <a style="display:block" id="show" onclick="myFunction()" class="btn btn-info">Rate</a>
+      <hr>      
+      <form id="rate" style="display:none" action="/rate/{{post.id}}/0" method="post" enctype="mulitpart/form-data">
+        {% csrf_token %}
+        <p>Design:</p>
+          <input type="radio" name="design" value="1">1
+          <input type="radio" name="design" value="2">2
+          <input type="radio" name="design" value="3">3
+          <input type="radio" name="design" value="4">4
+          <input type="radio" name="design" value="5">5
+          <input type="radio" name="design" value="6">6
+          <input type="radio" name="design" value="7">7
+          <input type="radio" name="design" value="8">8
+          <input type="radio" name="design" value="9">9
+          <input type="radio" name="design" value="10">10  
+
+        <p>Usability:</p>
+          <input type="radio" name="usability" value="1">1
+          <input type="radio" name="usability" value="2">2
+          <input type="radio" name="usability" value="3">3
+          <input type="radio" name="usability" value="4">4
+          <input type="radio" name="usability" value="5">5
+          <input type="radio" name="usability" value="6">6
+          <input type="radio" name="usability" value="7">7
+          <input type="radio" name="usability" value="8">8
+          <input type="radio" name="usability" value="9">9
+          <input type="radio" name="usability" value="10">10          
+
+        <p>Content:</p>
+          <input type="radio" name="content" value="1">1
+          <input type="radio" name="content" value="2">2
+          <input type="radio" name="content" value="3">3
+          <input type="radio" name="content" value="4">4
+          <input type="radio" name="content" value="5">5
+          <input type="radio" name="content" value="6">6
+          <input type="radio" name="content" value="7">7
+          <input type="radio" name="content" value="8">8
+          <input type="radio" name="content" value="9">9
+          <input type="radio" name="content" value="10">10                                
+
+        <input type="submit" class="btn btn-outline-danger" value="Rate">
+      </form>            
     </div>
     <div class="col-md-6">
       <div class="card">
@@ -16,10 +67,10 @@
         <div class="card-body">
           <p><b>Description:</b> {{post.description}}</p>
         </div>  
-        <div class="card-footer">
-          <p>Live Link: <a href="{{post.live_link}}">{{post.title}}</a></p>          
-          <p>Posted By: {{post.posted_by}}</p>
+        <div class="card-footer">          
+          <p>Posted By: <a href="/profile/{{post.posted_by}}"><b><i>{{post.posted_by}}</i></b></a></p>
           <p>Posted On: {{post.posted_on}}</p>
+          <a href="{{post.live_link}}" class="btn btn-outline-danger">View site</a>
         </div>                
       </div>
       <hr>
@@ -54,6 +105,16 @@
     </div>
   </div>
 </div>
+<script>    
+  function myFunction() {
+    var x = document.getElementById("rate");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
 {% endblock content %}
 
 {% block scripts %}
@@ -61,3 +122,6 @@
   <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
 {% endblock scripts %}
 
+  
+  
+  
