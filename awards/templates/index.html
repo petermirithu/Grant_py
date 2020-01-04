@@ -33,9 +33,9 @@
   <div class="row">
     <div class="card-columns">
       {% for post in posts %}
-      <div class="card">
+      <div class="card" style="width:370px">
         <div class="body">
-          <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="300px" heigth="250px" alt="{{post.title}}"></a>          
+          <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="350px" heigth="300px" alt="{{post.title}}"></a>          
           <p>{{post.posted_on}}</p>
           <hr>
           <div class="row">
@@ -53,7 +53,7 @@
         </div>
       </div>
       {% endfor %}
-    </div>      
+    </div>        
   </div>    
 </div>  
 {% endblock content %}
