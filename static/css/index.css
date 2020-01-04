@@ -1,0 +1,52 @@
+#box{
+  color: azure;
+  font-weight: bold;
+}
+#link {
+  position: absolute;
+  top: 75%;
+  left: 10%;
+}
+#winner {
+  position: absolute;
+  top: 17%;
+  left: 10%;  
+}
+#content {
+  position: absolute;
+  top: 75%;
+  font-weight: bold;
+  right: 15%;
+}
+#title {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#rate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* dots */
+.dot {
+  height: 100px;
+  width: 100px;    
+  border-radius: 50%;
+  line-height: 100px;
+  font-size: 13px;
+  display: inline-block;  
+  text-align: center;  
+}
+.dotX {
+  height: 50px;
+  width: 50px;    
+  border-radius: 50%;
+  line-height: 50px;
+  font-size: 13px;
+  display: inline-block;  
+  text-align: center;  
+}
