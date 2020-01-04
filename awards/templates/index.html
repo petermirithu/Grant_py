@@ -11,11 +11,21 @@
 <div id="box" class="container-fluid">  
   <img src="{{winner.landing_page_pic.cdn_url}}" style="width:100%;height:80vh;filter: brightness(80%);" alt="{{winner.title}}">
   <p id="winner"><b>Site of the day</b> {{date}}</p>
-  <h1 id="title"><b>{{winner.title|title}}</b></h1>
+  <h1 id="title"><b>{{winner.title|title}}</b>
+      <a href="/profile/{{winner.posted_by}}" style="font-size:20px"><small>By <span style="color:lightblue">{{winner.posted_by}}</span></small></a>
+  </h1>
   <a id="rate">
     <span style="border:4px solid blue;" class="dot">Design: {{rate_desi|floatformat:1}}%</span> <span style="border:4px solid orange;"class="dot">Usability: {{rate_usabi|floatformat:1}}%</span> <span style="border:4px solid red;" class="dot">Content: {{rate_conte|floatformat:1}}%</span> <span style="border:4px solid violet;"class="dot">Grand Total:{{winner.total}}</span>
   </a>      
-  <h6 id="content">Created By: {{winner.posted_by}}</h6>
+  <h6 id="content">Voters:
+    {% for rater in raters %}
+      {% if rater.user.profile.profile_pic %}
+        <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="{{rater.user.profile.profile_pic}}" width="40px" height="40px"></a></span>
+        {% else %}
+        <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLiVPh45RkmE-FnMz_mZBOwcrK2BemrMoJ5I5SRSa5zHuMy3L&s" width="40px" height="40px"></a></span>
+      {% endif %}
+    {% endfor %}
+  </h6>  
   <a id="link" href="{{winner.live_link}}"class="btn btn-danger">View Site</a>
 </div>
 <hr>
@@ -26,9 +36,20 @@
       <div class="card">
         <div class="body">
           <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="300px" heigth="250px" alt="{{post.title}}"></a>          
-          <a href="/profile/{{post.posted_by}}"><h6><b><i>{{post.posted_by}}</i></b></h6></a>
           <p>{{post.posted_on}}</p>
-          <div>Rates:<span style="border:4px solid violet;"class="dotX">{{post.total}}</span></div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              {% if post.posted_by.profile.profile_pic %}
+                <a href="/profile/{{post.posted_by}}"><img class="rounded-circle" src="{{post.posted_by.profile.profile_pic}}" width="40px" height="40px"><span>By {{post.posted_by}}</span></a>
+                {% else %}
+                <a href="/profile/{{post.posted_by}}"><img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLiVPh45RkmE-FnMz_mZBOwcrK2BemrMoJ5I5SRSa5zHuMy3L&s" width="40px" height="40px"><span>By {{post.posted_by}}</span></a>
+              {% endif %}
+            </div>
+            <div class="col-md-6">
+              <a style="color:black" href="/single_post/{{post.id}}">Rates<span style="border:4px solid violet;"class="dotX">{{post.total}}</span></a>
+            </div>  
+          </div>
         </div>
       </div>
       {% endfor %}
