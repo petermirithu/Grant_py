@@ -28,7 +28,7 @@ class projo_post(models.Model):
   class that defines how projects are going to be stored
   '''
   title=models.CharField(max_length=100)
-  landing_page_pic=ImageField(blank=True,manual_crop='')
+  landing_page_pic=ImageField(manual_crop='')
   live_link=models.CharField(max_length=1000)
   description=models.TextField(max_length=2000)  
   posted_by=models.ForeignKey(User, on_delete=models.CASCADE)
@@ -99,7 +99,15 @@ class preference(models.Model):
   content=models.IntegerField()
 
   def __str__(self):
-    return self.post     
+    return self.post    
+
+  @classmethod
+  def get_rater_users(cls,post_id):
+    '''
+    function that gets users who have rated a post
+    '''
+    raters=cls.objects.filter(post__id__contains=post_id)
+    return raters
   
 class reviews(models.Model):
   '''
