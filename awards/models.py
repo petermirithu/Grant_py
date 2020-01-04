@@ -87,6 +87,10 @@ class projo_post(models.Model):
     post=cls.objects.latest()
     return post
 
+  @classmethod
+  def search_roject(cls,post_name):
+    posts=cls.objects.filter(title__icontains=post_name)
+    return posts
 
 class preference(models.Model):
   '''

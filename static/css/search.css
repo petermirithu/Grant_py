@@ -1,0 +1,11 @@
+/* dots */
+.dot {
+  height: 50px;
+  width: 50px;    
+  border-radius: 50%;
+  line-height: 50px;
+  font-size: 10px;
+  display: inline-block;  
+  text-align: center;  
+  font-weight: bold;
+}

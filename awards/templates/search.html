@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block styles %}
+  {{block.super}}
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock styles %}
+
+
+{% block content %}
+<div class="container">
+  {% if projects %}
+    <p class="alert-success">Found {{projects|length}} stuff related to {{message}}</p>
+  {% else %}
+    <p class="alert-danger">Found 0 stuff related to {{message}}</p>
+  {% endif %}
+  
+  {% for post in projects %}
+    <div class="card" width="20%">
+      <div class="row">
+        <div class="col-md-6">        
+          <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="560px" heigth="500px" alt="{{post.title}}"></a>
+        </div>  
+        <div class="col-md-6">
+          <div class="card-body">
+            <p><b>Description:</b> {{post.description}}</p>
+          </div>  
+          <div class="card-footer">
+            <p>Posted On: {{post.posted_on}}</p>
+            <a href="{{post.live_link}}" class="btn btn-outline-danger">View site</a>&nbsp;&nbsp;&nbsp;&nbsp;                        
+            <a>Rates: <span style="border:4px solid violet;"class="dot">{{post.total}}</span><hr></a>
+            {% if post.posted_by.profile.profile_pic %}
+              <a href="/profile/{{post.posted_by}}"><img class="rounded-circle" src="{{post.posted_by.profile.profile_pic}}" width="40px" height="40px"><span>By {{post.posted_by}}</span></a>
+            {% else %}
+              <a href="/profile/{{post.posted_by}}"><img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLiVPh45RkmE-FnMz_mZBOwcrK2BemrMoJ5I5SRSa5zHuMy3L&s" width="40px" height="40px"><span>By {{post.posted_by}}</span></a>
+            {% endif %}            
+          </div>  
+        </div>
+      </div>
+    </div>
+    <br>
+  {% endfor %}
+</div>
+{% endblock content %}

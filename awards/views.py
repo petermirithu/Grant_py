@@ -103,7 +103,6 @@ def post_project(request):
   '''
   view function tha renders the post project form
   '''
-  title='New_Post'  
   if request.method=='POST':
     form=ProjectPostForm(request.POST,request.FILES)
     if form.is_valid():
@@ -112,8 +111,8 @@ def post_project(request):
       post.save()
       return redirect('home')
   else:
+    title='New_Post'  
     form=ProjectPostForm()
-
     return render(request, 'new_post.html',{"title":title,"form":form})  
 
 @login_required(login_url='/accounts/login/')  
@@ -213,7 +212,31 @@ def rate(request,post_id,rated):
 
       return redirect('single_post',project.id)
   
+@login_required(login_url='/accounts/login/')  
+def search(request):
+  '''
+  view function that searches for projects  
+  '''
+  if 'search_term' in request.GET and request.GET['search_term']:
+    term=request.GET.get('search_term')
+    try:      
+      projects=projo_post.search_roject(term)      
+      message=f'{term}'
+      title=term
+      return render(request,'search.html',{"message":message,"title":title,"projects":projects})
 
+    except projo_post.DoesNotExist:
+      message=f'{term}'
+      return render(request,'search.html',{"message":message,"title":title})        
+
+@login_required(login_url='/accounts/login/')  
+def delete_project(request, post_id):
+  '''
+  view function that helps in deleting a project
+  '''
+  post=projo_post.get_single_post(post_id)
+  post.delete()
+  return redirect('home')
 
 
 

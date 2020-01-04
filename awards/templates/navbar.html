@@ -1,9 +1,21 @@
+<style>
+  #display_btn:hover{
+    cursor:pointer;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light\" style="background-color: #e3f2fd;">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   
   <a class="navbar-brand" href="{% url 'home' %}">Grant_py</a>
+
+  <form id="searchform" style="display:none" class="form-inline" role='search' action="{% url 'search' %}">
+    <input type="text" class="form-control" placeholder="Search for Projects" name="search_term">
+    <button style="background-color:lightblue" type="submit"><i class="fab fa-searchengin"></i></button>            
+  </form>  
+
+  <a id="display_btn" onclick="display_form()" style="margin-left:35%" class="nav-link"><h4>Search<i class="fab fa-searchengin"></i></h4></a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">  
     <ul class="navbar-nav ml-auto">
@@ -32,8 +44,6 @@
       {% endif %}
     </ul>    
   </div>
-  <scripts>
-    <script src="https://kit.fontawesome.com/8311960bd4.js" crossorigin="anonymous"></script>
-  </scripts>
+    <script src="https://kit.fontawesome.com/8311960bd4.js" crossorigin="anonymous"></script>    
 </nav>
 <br>
