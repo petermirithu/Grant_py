@@ -18,6 +18,7 @@ def home(request):
   date=dt.date.today()
   posts=projo_post.get_all_posts()
   winner=projo_post.winner_project()
+  raters=preference.get_rater_users(winner.id)
   desi=winner.design
   usabi=winner.usability
   conte=winner.content
@@ -34,6 +35,7 @@ def home(request):
     'rate_desi':perce_desi,
     'rate_usabi':perce_usabi,
     'rate_conte':perce_conte,
+    'raters':raters
   }
   return render(request,'index.html',context)
 
@@ -139,6 +141,7 @@ def single_post(request,post_id):
   view function to render a single post on a page
   '''
   post=projo_post.get_single_post(post_id)
+  raters=preference.get_rater_users(post.id)
   title=post.title
   form=reviewForm()
   projo_reviews=reviews.project_reviews(post_id)
@@ -151,7 +154,7 @@ def single_post(request,post_id):
   rate_desi=(desi/100)*total
   rate_usabi=(usabi/100)*total
   rate_conte=(conte/100)*total
-  return render(request, 'single_post.html',{"title":title,"post":post,"form":form,"reviews":projo_reviews,'rate_desi':rate_desi,'rate_usabi':rate_usabi,'rate_conte':rate_conte})
+  return render(request, 'single_post.html',{"title":title,"post":post,"form":form,"reviews":projo_reviews,'rate_desi':rate_desi,'rate_usabi':rate_usabi,'rate_conte':rate_conte,'raters':raters})
 
 @login_required(login_url='/accounts/login/')  
 def add_review(request,projo_id):
