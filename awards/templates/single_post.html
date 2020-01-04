@@ -68,9 +68,24 @@
           <p><b>Description:</b> {{post.description}}</p>
         </div>  
         <div class="card-footer">          
-          <p>Posted By: <a href="/profile/{{post.posted_by}}"><b><i>{{post.posted_by}}</i></b></a></p>
           <p>Posted On: {{post.posted_on}}</p>
-          <a href="{{post.live_link}}" class="btn btn-outline-danger">View site</a>
+          <a href="{{post.live_link}}" class="btn btn-outline-danger">View site</a>          
+          {% if post.posted_by.profile.profile_pic %}
+            <a href="/profile/{{post.posted_by}}"><img class="rounded-circle" src="{{post.posted_by.profile.profile_pic}}" width="40px" height="40px"><span>By {{post.posted_by}}</span></a>
+          {% else %}
+            <a href="/profile/{{post.posted_by}}"><img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLiVPh45RkmE-FnMz_mZBOwcrK2BemrMoJ5I5SRSa5zHuMy3L&s" width="40px" height="40px"><span>By {{post.posted_by}}</span></a>
+          {% endif %}
+          <hr>
+          {% if raters %}
+          <h5>Voters:</h5>
+            {% for rater in raters %}
+              {% if rater.user.profile.profile_pic %}
+                <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="{{rater.user.profile.profile_pic}}" width="40px" height="40px"></a></span>
+              {% else %}
+                <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLiVPh45RkmE-FnMz_mZBOwcrK2BemrMoJ5I5SRSa5zHuMy3L&s" width="40px" height="40px"></a></span>
+              {% endif %}
+            {% endfor %}                      
+          {% endif %}
         </div>                
       </div>
       <hr>
@@ -96,9 +111,14 @@
     </div>
     <div class="col-md-8">
       {% for review in reviews %}
-        <div class="card" style="width:650px">
-          <p>{{review.body}}</p>
-          <p><small><b>Posted By:</b>{{review.posted_by}} <b>Posted On:</b>{{review.posted_on}}</small></p>                                                  
+        <div class="card" style="width:650px">     
+        {% if review.posted_by.profile.profile_pic %}
+          <p><img class="rounded-circle" src="{{review.posted_by.profile.profile_pic}}" width="40px" heigth="40px"><b>{{review.posted_by}}</b> {{review.body}}</p>
+          <p>{{review.posted_on|timesince}}</p>                                                  
+        {% else %}
+          <p><img class="rounded-circle" src="https://cdn4.iconfinder.com/data/icons/human-user-business-person-avatars/100/23A-1User-512.png" width="40px" heigth="40px"><b>{{review.posted_by}}</b> {{review.body}}</p>
+          <p>{{review.posted_on|timesince}}</p>    
+        {% endif %}             
         </div>
         <br>
       {% endfor %}        
