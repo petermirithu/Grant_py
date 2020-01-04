@@ -24,7 +24,7 @@ class ProjectPostForm(forms.ModelForm):
   '''
   class Meta:
     model=projo_post
-    exclude=['posted_by','posted_on']  
+    fields=['title','landing_page_pic','live_link','description']  
     
 class reviewForm(forms.ModelForm):
   '''
@@ -34,3 +34,4 @@ class reviewForm(forms.ModelForm):
     model=reviews
     fields=['body']
     
+
