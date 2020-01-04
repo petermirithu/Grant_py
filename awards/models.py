@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from pyuploadcare.dj.models import ImageField
+from django.http import Http404
 
 class profile(models.Model):
   '''
@@ -32,9 +33,15 @@ class projo_post(models.Model):
   description=models.TextField(max_length=2000)  
   posted_by=models.ForeignKey(User, on_delete=models.CASCADE)
   posted_on=models.DateField(auto_now_add=True)
+  design=models.IntegerField(default=0)
+  usability=models.IntegerField(default=0)
+  content=models.IntegerField(default=0)
+  total=models.IntegerField(default=0)
+  
 
   class Meta:
     ordering=['posted_on']
+    get_latest_by = 'total'
 
   def __str__(self):
       return self.title
@@ -75,6 +82,25 @@ class projo_post(models.Model):
     posts=cls.objects.filter(posted_by__id__contains=user_id).order_by('-id')
     return posts
 
+  @classmethod
+  def winner_project(cls):
+    post=cls.objects.latest()
+    return post
+
+
+class preference(models.Model):
+  '''
+  class that defines how users are going to rate a project
+  '''
+  user=models.ForeignKey(User, on_delete=models.CASCADE)
+  post=models.ForeignKey(projo_post, on_delete=models.CASCADE)
+  design=models.IntegerField()
+  usability=models.IntegerField()
+  content=models.IntegerField()
+
+  def __str__(self):
+    return self.post     
+  
 class reviews(models.Model):
   '''
   class that defines how comments achitecture shall look like
