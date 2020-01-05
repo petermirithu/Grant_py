@@ -223,7 +223,7 @@ def search(request):
   if 'search_term' in request.GET and request.GET['search_term']:
     term=request.GET.get('search_term')
     try:      
-      projects=projo_post.search_roject(term)      
+      projects=projo_post.search_project(term)      
       message=f'{term}'
       title=term
       return render(request,'search.html',{"message":message,"title":title,"projects":projects})
