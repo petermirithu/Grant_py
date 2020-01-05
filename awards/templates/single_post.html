@@ -8,7 +8,7 @@
 {% endblock styles %}
 
 {% block content %}  
-<div class="container">
+<div class="container-fluid">
   <h1 class="jumbotron text-center">{{post.title}}</h1>
   {% if message %}
     <div class="alert alert-danger">{{mesage}}</div>
@@ -97,11 +97,11 @@
   </div>
 </div>
 <hr>
-<div class="container-fluid">  
+<div class="container">  
   <h1><u>Reviews</u></h1>
   <div class="row">    
     <div class="col-md-4">      
-      <form action="/ajax/review/{{post.id}}" method="post" enctype="mulitpart/form-data">
+      <form id="review_form" action="/ajax/review/{{post.id}}" method="post" enctype="mulitpart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}      
         <div class='form-group'>
@@ -109,7 +109,7 @@
         </div>
       </form>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 content">
       {% for review in reviews %}
         <div class="card" style="width:650px">     
         {% if review.posted_by.profile.profile_pic %}
@@ -138,7 +138,7 @@
 {% endblock content %}
 
 {% block scripts %}
-  {{block.super}}
+  {{block.super}}  
   <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/rate.js' %}"></script>
 {% endblock scripts %}

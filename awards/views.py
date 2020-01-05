@@ -9,6 +9,9 @@ from django.http import JsonResponse
 import json
 import datetime as dt
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import profileSerializer,projectSerializer
 
 
 def home(request):
@@ -168,7 +171,7 @@ def add_review(request,projo_id):
       review.posted_by=request.user
       review.projo_id=project
       review.save()
-      data={'success': 'Successfully added you review...'}
+      data={'success': 'Successfully added your review...'}
       return JsonResponse(data)
 
 @login_required(login_url='/accounts/login/')  
@@ -220,7 +223,7 @@ def search(request):
   if 'search_term' in request.GET and request.GET['search_term']:
     term=request.GET.get('search_term')
     try:      
-      projects=projo_post.search_roject(term)      
+      projects=projo_post.search_project(term)      
       message=f'{term}'
       title=term
       return render(request,'search.html',{"message":message,"title":title,"projects":projects})
@@ -239,6 +242,23 @@ def delete_project(request, post_id):
   return redirect('home')
 
 
+class profileList(APIView):
+  def get(self, request, format=None):
+    '''
+    function that gets all profiles in json format
+    '''
+    all_profiles=profile.objects.all()
+    serializers=profileSerializer(all_profiles, many=True)
+    return Response(serializers.data)
+
+class projectList(APIView):
+  def get(self, request, format=None):
+    '''
+    function that gets all projects posted
+    '''
+    all_projects=projo_post.objects.all()
+    serializers=projectSerializer(all_projects, many=True)
+    return Response(serializers.data)
 
 
   

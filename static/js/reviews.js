@@ -1,7 +1,7 @@
 $(document).ready(function(){  
-  $('form').submit(function(event){
+  $('#review_form').on('submit',function(event){
     event.preventDefault()
-    form=$("form")
+    form= $('#review_form')
     
     $.ajax({
       url:'/ajax/review/<int:projo_id>',
@@ -9,8 +9,9 @@ $(document).ready(function(){
       data:form.serialize(),
       dataType:'json',   
       success:function(data){
-        alert('Successfully added you review...')
+        alert(data['success'])
+        $('#id_body').val('')
       },
-    })        
+    })      
   })
 })

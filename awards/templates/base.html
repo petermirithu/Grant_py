@@ -23,7 +23,6 @@
   {% endblock content %}
   <br>
 
-  {% block scripts %}
   <script>
   function display_form() {
       var search = document.getElementById("searchform");
@@ -36,7 +35,8 @@
       }
     }
     </script>
-    <script src="https://ajax.googleapis.com/ajx/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajx/libs/jquery/3.2.1/jquery.min.js"></script>    
     <script>UPLOADCARE_PUBLIC_KEY = "YOUR_PUBLIC_KEY";</script>
     <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
     {% bootstrap_javascript %}
@@ -44,11 +44,11 @@
   <div class="footer jumbotron">
     <h4><i class="fas fa-grin-tongue-wink"></i></h4>
     <h5><b>Thank you for visiting Grant_py. Connect with us via:</b></h5>
-    <a><i class="fab fa-instagram"></i> <a href="">@grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a><i class="fab fa-twitter-square"></i> <a href="">@ grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a><i class="fab fa-facebook"></i> <a href="">@ grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a><i class="fas fa-phone-square-alt"></i> 0790476167</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a><i class="fas fa-envelope"></i> <a href="">pyra_m.k@yahoo.com</a></a>
+    <a><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/?hl=en">@grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a><i class="fab fa-twitter-square"></i> <a href="https://twitter.com/login?lang=en">@ grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/">@ grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a><i class="fas fa-phone-square-alt"></i> 0790476167</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a><i class="fas fa-envelope"></i> pyra_m.k@yahoo.com</a>
   </div>
   </body>
 </html>
