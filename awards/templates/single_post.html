@@ -101,7 +101,7 @@
   <h1><u>Reviews</u></h1>
   <div class="row">    
     <div class="col-md-4">      
-      <form action="/ajax/review/{{post.id}}" method="post" enctype="mulitpart/form-data">
+      <form id="review_form" action="/ajax/review/{{post.id}}" method="post" enctype="mulitpart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}      
         <div class='form-group'>
@@ -138,7 +138,7 @@
 {% endblock content %}
 
 {% block scripts %}
-  {{block.super}}
+  {{block.super}}  
   <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/rate.js' %}"></script>
 {% endblock scripts %}
