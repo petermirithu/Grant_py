@@ -9,6 +9,9 @@ from django.http import JsonResponse
 import json
 import datetime as dt
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import profileSerializer,projectSerializer
 
 
 def home(request):
@@ -239,6 +242,23 @@ def delete_project(request, post_id):
   return redirect('home')
 
 
+class profileList(APIView):
+  def get(self, request, format=None):
+    '''
+    function that gets all profiles in json format
+    '''
+    all_profiles=profile.objects.all()
+    serializers=profileSerializer(all_profiles, many=True)
+    return Response(serializers.data)
+
+class projectList(APIView):
+  def get(self, request, format=None):
+    '''
+    function that gets all projects posted
+    '''
+    all_projects=projo_post.objects.all()
+    serializers=projectSerializer(all_projects, many=True)
+    return Response(serializers.data)
 
 
   
