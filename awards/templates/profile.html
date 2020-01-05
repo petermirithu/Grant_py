@@ -33,7 +33,7 @@
           <p><i class="fas fa-phone-square-alt"></i>: ....</p>
           {% endif %}
           {% if user.profile.git_name %}
-          <p><i class="fab fa-github"></i>: <i>{{user.profile.git_name}}</i></p>
+          <p><i class="fab fa-github"></i>: <a href="https://github.com/search?q={{user.profile.git_name}}&ref=opensearch"><i>{{user.profile.git_name}}</i></a></p>
           {% else %}
           <p><i class="fab fa-github"></i>: ....</p>
           {% endif %}
