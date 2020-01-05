@@ -88,7 +88,7 @@ class projo_post(models.Model):
     return post
 
   @classmethod
-  def search_roject(cls,post_name):
+  def search_project(cls,post_name):
     posts=cls.objects.filter(title__icontains=post_name)
     return posts
 
