@@ -168,7 +168,7 @@ def add_review(request,projo_id):
       review.posted_by=request.user
       review.projo_id=project
       review.save()
-      data={'success': 'Successfully added you review...'}
+      data={'success': 'Successfully added your review...'}
       return JsonResponse(data)
 
 @login_required(login_url='/accounts/login/')  
