@@ -171,8 +171,8 @@ def add_review(request,projo_id):
       review.posted_by=request.user
       review.projo_id=project
       review.save()
-      data={'success': 'Successfully added your review...'}
-      return JsonResponse(data)
+      data={'success': 'Successfully added your review ...','post_id':projo_id}      
+      return JsonResponse(json.dumps(data))
 
 @login_required(login_url='/accounts/login/')  
 def rate(request,post_id,rated):
@@ -186,15 +186,10 @@ def rate(request,post_id,rated):
     project=get_object_or_404(projo_post,id=post_id)
         
     try:                  
-      obj_post=preference.objects.get(user=request.user,post=project)                   
-      design_value=obj_post.design
-      usability_value=obj_post.usability
-      content_value=obj_post.content
-
-      if design_value and usability_value and content_value == int(rated):
-        message="you have aleady rated this project"
-        project=get_object_or_404(projo_post,id=post_id)
-        return redirect('single_post',project.id,{"message":message})              
+      obj_post=preference.objects.get(user=request.user,post=project)                         
+      if obj_post.user == request.user:      
+        data={'success': 'You have already Rated this post!'}
+        return JsonResponse(data)        
 
     except preference.DoesNotExist:
       rater=preference()

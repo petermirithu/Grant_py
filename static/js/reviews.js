@@ -1,17 +1,20 @@
 $(document).ready(function(){  
-  $('#review_form').on('submit',function(event){
+  $('form').submit(function(event){
     event.preventDefault()
-    form= $('#review_form')
+    form=$('form')
     
     $.ajax({
-      url:'/ajax/review/<int:projo_id>',
+      post_id:function(data){
+        var x= data['post_id']
+      },
+      url:'/ajax/review/'+x+'/',
       type:'POST',
       data:form.serialize(),
       dataType:'json',   
       success:function(data){
         alert(data['success'])
-        $('#id_body').val('')
       },
     })      
+    $('#id_body').val('')
   })
 })
