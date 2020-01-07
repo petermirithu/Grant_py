@@ -4,38 +4,40 @@
 
 {% block styles %}
   {{block.super}}
-  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">  
 {% endblock styles %}
 
 {% block content %}
-<div id="box" class="container-fluid">  
-  <img src="{{winner.landing_page_pic.cdn_url}}" style="width:100%;height:80vh;filter: brightness(80%);" alt="{{winner.title}}">
-  <p id="winner"><b>Site of the day</b> {{date}}</p>
-  <h1 id="title"><b>{{winner.title|title}}</b>
-      <a href="/profile/{{winner.posted_by}}" style="font-size:20px"><small>By <span style="color:lightblue">{{winner.posted_by}}</span></small></a>
-  </h1>
-  <a id="rate">
-    <span style="border:4px solid blue;" class="dot">Design: {{rate_desi|floatformat:1}}%</span> <span style="border:4px solid orange;"class="dot">Usability: {{rate_usabi|floatformat:1}}%</span> <span style="border:4px solid red;" class="dot">Content: {{rate_conte|floatformat:1}}%</span> <span style="border:4px solid violet;"class="dot">Grand Total:{{winner.total}}</span>
-  </a>      
-  <h6 id="content">Voters:
-    {% for rater in raters %}
-      {% if rater.user.profile.profile_pic %}
-        <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="{{rater.user.profile.profile_pic}}" width="40px" height="40px"></a></span>
-        {% else %}
-        <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLiVPh45RkmE-FnMz_mZBOwcrK2BemrMoJ5I5SRSa5zHuMy3L&s" width="40px" height="40px"></a></span>
-      {% endif %}
-    {% endfor %}
-  </h6>  
-  <a id="link" href="{{winner.live_link}}"class="btn btn-danger">View Site</a>
-</div>
+<a style="color:white;" href="/single_post/{{winner.id}}">
+  <div id="box" class="container-fluid">  
+    <img class="faded" src="{{winner.landing_page_pic.cdn_url}}" width='100%' height='450px' style="filter: brightness(80%);" alt="{{winner.title}}">
+    <p id="winner"><b>Site of the day</b> {{date}}</p>
+    <h1 id="title"><b>{{winner.title|title}}</b>
+        <a href="/profile/{{winner.posted_by}}" style="font-size:20px"><small>By <span style="color:lightblue">{{winner.posted_by}}</span></small></a>
+    </h1>
+    <a id="rate">
+      <span style="border:4px solid blue;" class="dot floating1">Design: {{rate_desi|floatformat:1}}%</span> <span style="border:4px solid orange;"class="dot floating2">Usability: {{rate_usabi|floatformat:1}}%</span> <span style="border:4px solid red;" class="dot floating3">Content: {{rate_conte|floatformat:1}}%</span> <span style="border:4px solid violet;"class="dot floating4">Grand Total:{{winner.total}}</span>
+    </a>      
+    <h6 class="btn" id="content">Voters:
+      {% for rater in raters %}
+        {% if rater.user.profile.profile_pic %}
+          <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="{{rater.user.profile.profile_pic}}" width="40px" height="40px"></a></span>
+          {% else %}
+          <span><a href="/profile/{{rater.user}}"><img class="rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLLiVPh45RkmE-FnMz_mZBOwcrK2BemrMoJ5I5SRSa5zHuMy3L&s" width="40px" height="40px"></a></span>
+        {% endif %}
+      {% endfor %}
+    </h6>  
+    <a class="btn" id="link" href="{{winner.live_link}}" >View site</a>    
+  </div>
+</a>
 <hr>
 <div class="container">   
   <div class="row">
     <div class="card-columns">
       {% for post in posts %}
-      <div class="card" style="width:370px">
+      <div class="card" style="width:100%;border-radius:20px 0px 20px 0px">
         <div class="body">
-          <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="350px" heigth="300px" alt="{{post.title}}"></a>          
+          <a href="/single_post/{{post.id}}"><img style="border-radius:10px 0px 10px 0px" src="{{post.landing_page_pic.cdn_url}}" width="90%" heigth="300px" alt="{{post.title}}"></a>          
           <p>{{post.posted_on}}</p>
           <hr>
           <div class="row">
@@ -54,12 +56,8 @@
       </div>
       {% endfor %}
     </div>        
-  </div>    
+  </div>      
 </div>  
 {% endblock content %}
-
-
 {% block scripts %}
-  {{block.super}}
-  <script type="text/javascript" src="{% static 'js/likes.js' %}"></script>
 {% endblock scripts %}

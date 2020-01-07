@@ -9,7 +9,7 @@
 
 {% block content %}
   <div class="container"> 
-    <h1 class="text-center jumbotron">{{request.user|title}}'s Profile Page.</h1>
+    <h1 class="text-center jumbotron wow heartBeat">{{request.user|title}}'s Profile Page.</h1>
     <div class="row">
       <div class="col-md-6">               
         {% if user.first_name %}
@@ -37,11 +37,13 @@
           {% else %}
           <p><i class="fab fa-github"></i>: ....</p>
           {% endif %}
+        <h5><b>Projects:</b></h5>        
+          <h6 style="color:blue">{{posts.count}}</h6>
       </div>  
       <div class="col-md-6">
         <div class="row">
           <div class="col-md-6">
-            <a href="/update/profile/" class="btn btn-outline-success">Update Profile</a>                               
+            <a href="/update/profile/" class="wow hinge btn btn-outline-success">Update Profile</a>                               
           </div>
           <div class="col-md-6">
             {% if user.profile.profile_pic %}
@@ -60,7 +62,7 @@
     <div class="row">
     {% if posts %}
       {% for post in posts %}
-      <div class="card" width="400px">
+      <div class="card" style="border-radius:0px 20px 20px 20px" width="400px">
         <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="350px" heigth="350px" alt="{{post.title}}"></a>
         <hr>
         <h6>Rating: </h6>
@@ -74,3 +76,9 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block scripts %}  
+  <script>
+      new WOW().init();
+  </script>
+{% endblock scripts %}

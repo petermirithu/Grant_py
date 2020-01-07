@@ -1,0 +1,16 @@
+body{
+  font-family: 'Ibarra Real Nova', serif;
+  background-image: linear-gradient(to right, #f2f6f9, #f0f5f8, #eff3f7, #edf2f5, #ebf1f4);
+}
+h1{
+  font-family: 'Griffy', cursive;
+}
+.navbar-brand{
+  font-family: 'Irish Grover', cursive;
+  font-weight: bold;
+  font-size: 29px;
+}
+#nav{
+  background-image: linear-gradient(to bottom, #454647, #353637, #252728, #171819, #020406);
+  color: azure;
+}

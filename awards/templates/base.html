@@ -11,8 +11,12 @@
   {% endif %}
 
   {% block styles %}
-    {% bootstrap_css %}    
-    <script src="https://kit.fontawesome.com/8311960bd4.js" crossorigin="anonymous"></script>
+    {% bootstrap_css %}        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css">    
+    <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Griffy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Irish+Grover&display=swap" rel="stylesheet">
+    <link href="{% static 'css/base.css'%}" rel="stylesheet">    
   {% endblock styles %}
 
   </head>
@@ -36,9 +40,16 @@
     }
     </script>
   {% block scripts %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css">    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+      new WOW().init();
+    </script>
     <script src="https://ajax.googleapis.com/ajx/libs/jquery/3.2.1/jquery.min.js"></script>    
-    <script>UPLOADCARE_PUBLIC_KEY = "YOUR_PUBLIC_KEY";</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>UPLOADCARE_PUBLIC_KEY = "YOUR_PUBLIC_KEY";</script>    
     <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/8311960bd4.js" crossorigin="anonymous"></script>
     {% bootstrap_javascript %}
   {% endblock scripts %}
   <div class="footer jumbotron">
@@ -48,7 +59,7 @@
     <a><i class="fab fa-twitter-square"></i> <a href="https://twitter.com/login?lang=en">@ grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a><i class="fab fa-facebook"></i> <a href="https://www.facebook.com/">@ grant_py</a></a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a><i class="fas fa-phone-square-alt"></i> 0790476167</a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a><i class="fas fa-envelope"></i> pyra_m.k@yahoo.com</a>
+    <a><i class="fas fa-envelope"></i> <a href="mailto: pyra_m.k@yahoo.com">pyra_m.k@yahoo.com</a></a>
   </div>
   </body>
 </html>

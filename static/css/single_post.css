@@ -1,16 +1,44 @@
 /* dots */
 .dot {
-  height: 80px;
-  width: 80px;    
+  height: 85px;
+  width: 85px;    
   border-radius: 50%;
   line-height: 50px;
   font-size: 10px;
   display: inline-block;  
   text-align: center;  
   font-weight: bold;
+  transition: all .8s ease-Out;
+  cursor: pointer;
 }
 .content{
   height: 400px;    
   overflow: auto;  
   background-color: rgb(235, 235, 235);
+}
+#site{
+  border-radius: 20px;
+  background-color: rgb(12, 198, 231);
+  color: black;
+  transition: all .5s ease-Out;
+}
+#site:hover{
+  color: azure;
+  background-color: black;
+  border: 3px solid rgb(9, 185, 216);  
+}
+.dot:hover{
+  transform: translateY( -7px); 
+  transition: all .8s ease-Out; 
+}
+.card{
+  transition: all .5s ease-Out;
+}
+.card:hover{
+  box-shadow: 6px 6px black;  
+  transition: all .5s ease-Out;
+}
+#numb{
+  border-radius:3px;  
+  border: 2px solid black;
 }

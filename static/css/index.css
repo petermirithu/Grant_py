@@ -1,11 +1,21 @@
 #box{
   color: azure;
-  font-weight: bold;
+  font-weight: bold;    
 }
 #link {
   position: absolute;
   top: 75%;
   left: 5%;
+  display: inline-flex;  
+  border-radius: 20px;
+  background-color: rgb(206, 10, 75);
+  color: black;
+  transition: all .5s ease-Out;
+}
+#link:hover{
+  color: azure;
+  background-color: black;
+  border: 3px solid rgb(9, 185, 216);  
 }
 #winner {
   position: absolute;
@@ -16,30 +26,46 @@
   position: absolute;
   top: 75%;
   font-weight: bold;
-  right: 15%;
+  right: 15%;    
+  border-radius: 20px;
+  border: 2px solid black;
+  transition: all .5s ease-Out;
+}
+#content:hover{  
+  transition: all .5s ease-Out;
+  color: azure;
+  background-color: black;
+  border: 3px solid rgb(9, 185, 216);
 }
 #title {
   position: absolute;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+  color: azure;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;  
+  transition: all .8s ease-Out; 
 }
 #rate {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 /* dots */
 .dot {
-  height: 100px;
-  width: 100px;    
+  height: 110px;
+  width: 110px;    
   border-radius: 50%;
   line-height: 100px;
   font-size: 13px;
   display: inline-block;  
   text-align: center;  
+  transition: all .8s ease-Out; 
+  cursor: pointer;  
 }
 .dotX {
   height: 50px;
@@ -50,3 +76,88 @@
   display: inline-block;  
   text-align: center;  
 }
+.dot:hover{
+  transform: translateY( -7px); 
+  transition: all .8s ease-Out; 
+}
+
+
+/* cards styling */
+.card{  
+  transition: all .5s ease-Out;
+}
+.card:hover{
+  box-shadow: 6px 6px black;  
+  transition: all .5s ease-Out;
+}
+.floating1 {  
+  animation-name: floating;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+@keyframes floating {
+  from { transform: translate(0,  0px); }
+  65%  { transform: translate(0, 15px); }
+  to   { transform: translate(0, -0px); }    
+}
+.floating2 {  
+  animation-name: floating;
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+@keyframes floating {
+  from { transform: translate(0,  0px); }
+  65%  { transform: translate(0, 15px); }
+  to   { transform: translate(0, -0px); }    
+}
+.floating3 {  
+  animation-name: floating;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+@keyframes floating {
+  from { transform: translate(0,  0px); }
+  65%  { transform: translate(0, 15px); }
+  to   { transform: translate(0, -0px); }    
+}
+.floating4 {  
+  animation-name: floating;
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+@keyframes floating {
+  from { transform: translate(0,  0px); }
+  65%  { transform: translate(0, 15px); }
+  to   { transform: translate(0, -0px); }    
+}
+
+.faded{
+  animation-name: zoom;
+  animation-duration: 2s;  
+  transition: all .8s ease-Out; 
+}
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+

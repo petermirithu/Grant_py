@@ -9,7 +9,7 @@
 
 {% block content %}
   <div class="container"> 
-    <h1 class="text-center jumbotron">{{person.username|title}}'s Profile Page.</h1>
+    <h1 class="text-center jumbotron wow heartBeat">{{person.username|title}}'s Profile Page.</h1>
     <div class="row">
       <div class="col-md-6">               
         {% if user.first_name %}
@@ -37,12 +37,14 @@
           {% else %}
           <p><i class="fab fa-github"></i>: ....</p>
           {% endif %}
+        <h5><b>Projects:</b></h5>        
+          <h6 style="color:blue">{{posts.count}}</h6>
       </div>  
       <div class="col-md-6">        
         {% if person.profile.profile_pic %}
-          <img class="rounded-circle"src="{{person.profile.profile_pic.cdn_url}}" width="250px" height="250px" alt="Profile photo">
+          <img class="wow fadeInRight rounded-circle"src="{{person.profile.profile_pic.cdn_url}}" width="250px" height="250px" alt="Profile photo">
         {% else %}
-          <img class="rounded-circle"src="https://cdn4.iconfinder.com/data/icons/human-user-business-person-avatars/100/23A-1User-512.png" width="250px" height="250px" alt="Profile photo">
+          <img class="wow fadeInRight rounded-circle"src="https://cdn4.iconfinder.com/data/icons/human-user-business-person-avatars/100/23A-1User-512.png" width="250px" height="250px" alt="Profile photo">
         {% endif %}                  
       </div>
     </div>
@@ -53,7 +55,7 @@
     <div class="row">
     {% if posts %}
       {% for post in posts %}
-      <div class="card" width="400px">
+      <div class="card" style="border-radius:0px 20px 20px 20px" width="400px">
         <a href="/single_post/{{post.id}}"><img src="{{post.landing_page_pic.cdn_url}}" width="350px" heigth="350px" alt="{{post.title}}"></a>
         <hr>
         <h6>Rating: </h6>
