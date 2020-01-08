@@ -128,6 +128,25 @@ class preferenceTestCase(TestCase):
 
     self.assertEqual(len(raters),2)
 
+class profileTestcase(TestCase):
+  '''
+  class containing test cases for all function under profile model
+  '''
+  def setUp(self):
+    self.user_pyra=User(username='pyra',password='5678bn',email='pyra_@yahoo.com')        
+    self.user_pyra.save()
+
+    self.profile_pyra=profile(user=self.user_pyra ,bio='Software developer',profile_pic='https://ucarecdn.com/ff373002-7443-47bf-8007-747b9fe7fc95/',contact='0790476167',git_name='petermirithu')        
+    # self.profile_pyra.save()
+    
+  def tearDown(self):
+    User.objects.all().delete()
+    profile.objects.all().delete()
+    
+  def test_instance(self):
+    self.assertTrue(isinstance(self.user_pyra, User))
+    self.assertTrue(isinstance(self.profile_pyra, profile))
+
 class reviewsTestCase(TestCase):
   '''
   class that contains test cases for all function under review model
@@ -162,32 +181,18 @@ class reviewsTestCase(TestCase):
     found=reviews.project_reviews(self.post1.id)
     self.assertEqual(len(found),2)
 
+  def test_get_latest_review(self):
+    '''
+    test to get latest review posted
+    '''
+    self.post1.save()
+    self.review1.save()
+    self.review2.save()
+    found=reviews.get_review_latest()
+    self.assertTrue(found.body==self.review2.body)
 
-class profileTestcase(TestCase):
-  '''
-  class containing test cases for all function under profile model
-  '''
-  def setUp(self):
-    self.user_pyra=User(username='pyra',password='5678bn',email='pyra_@yahoo.com')        
-    self.user_pyra.save()
 
-    self.profile_pyra=profile(user=self.user_pyra ,bio='Software developer',profile_pic='https://ucarecdn.com/ff373002-7443-47bf-8007-747b9fe7fc95/',contact='0790476167',git_name='petermirithu')        
-    # self.profile_pyra.save()
-    
-  def tearDown(self):
-    User.objects.all().delete()
-    profile.objects.all().delete()
-    
-  def test_instance(self):
-    self.assertTrue(isinstance(self.user_pyra, User))
-    self.assertTrue(isinstance(self.profile_pyra, profile))
 
-    
-  # def test_save(self):      
-  #   self.user_pyra.save()      
-  #   self.pyra.save_profile()
-  #   profiles=profiles.objects.all()
-  #   self.assertTrue(len(profiles)==1)
 
 
 
