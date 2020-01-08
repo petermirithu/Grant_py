@@ -5,26 +5,29 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-10">
-    {% if form.errors %}
-    <p class="alert alert-danger">Something is wrong with the infomation you entered. Try again</p>
-    {% endif %}
-
-    <div class="card bg-transparent">
-      <div class="card-header"><h2><b><u>Update Post</u></b></h2></div>
-      <div class="card-body">
-        <form action="{% url 'update_post' post_id=post_id%}" method="post" enctype="mulitpart/form-data">
-          {% csrf_token %}
-          {% bootstrap_form form %}          
-          <div class='form-group'>                     
-            <hr>
-            <input type="submit" class="btn btn-outline-danger" value="Update">
-          </div>
-        </form>        
-      </div>      
+    <div class="col-md-3">
+      <img class="rounded-circle"src="https://logos.co/1024/logo-of-black-and-white-bowling-ball-and-championship-trophy-shield-with-a-crown-and-laurel-by-vector-tradition-sm-62372.jpg" width="200px">
     </div>
-    <div class="col-md-1"></div>
+    <div class="col-md-9">
+      {% if form.errors %}
+      <p class="alert alert-danger">Something is wrong with the infomation you entered. Try again</p>
+      {% endif %}
+
+      <div class="card bg-transparent">
+        <div class="card-header"><h2><b><u>Update Post</u></b></h2></div>
+        <div class="card-body">
+          <form action="{% url 'update_post' post_id=post_id%}" method="post" enctype="mulitpart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}          
+            <div class='form-group'>                     
+              <hr>
+              <input type="submit" class="btn btn-outline-danger" value="Update">
+            </div>
+          </form>        
+        </div>              
+      </div>  
+
+    </div>    
   </div>
 </div>
 {% endblock content %}
