@@ -159,31 +159,40 @@ def single_post(request,post_id):
   return render(request, 'single_post.html',{"title":title,"post":post,"form":form,"reviews":projo_reviews,'rate_desi':rate_desi,'rate_usabi':rate_usabi,'rate_conte':rate_conte,'raters':raters})
 
 @login_required(login_url='/accounts/login/')  
-def add_review(request,projo_id):
+def add_review(request):
   '''
   view function that saves a review for a project to the database
   '''
   if request.method=='POST':
     review_form=reviewForm(request.POST)
-    project=projo_post.get_single_post(projo_id)
+    post_id_x=request.POST.get('post_id')
+    post_id=int(post_id_x)    
+    project=projo_post.get_single_post(post_id)
     if review_form.is_valid():
       review=review_form.save(commit=False)
       review.posted_by=request.user
       review.projo_id=project
       review.save()
-      data={'success': 'Successfully added your review ...','post_id':projo_id}      
-      return JsonResponse(json.dumps(data))
+      review_posted=reviews.get_review_latest()
+      data={
+        'success':'Successfully added your review...',
+        'body':review_posted.body,
+        'posted_by':review_posted.posted_by.username,
+        'posted_on':review_posted.posted_on
+        }
+      return JsonResponse(data)
 
 @login_required(login_url='/accounts/login/')  
-def rate(request,post_id,rated):
+def rate(request):
   '''
   view function that helps in rating a post
   '''
   if request.method == "POST":      
     design = request.POST.get("design", None)
     usability = request.POST.get("usability", None)
-    content = request.POST.get("content", None)    
-    project=get_object_or_404(projo_post,id=post_id)
+    content = request.POST.get("content", None) 
+    post_id=request.POST.get('postID')   
+    project=get_object_or_404(projo_post,id=int(post_id))
         
     try:                  
       obj_post=preference.objects.get(user=request.user,post=project)                         
@@ -191,7 +200,8 @@ def rate(request,post_id,rated):
         data={'success': 'You have already Rated this post!'}
         return JsonResponse(data)        
 
-    except preference.DoesNotExist:
+    except preference.DoesNotExist:      
+      rated=request.POST.get('rated_true')      
       rater=preference()
       rater.user=request.user
       rater.post=project
@@ -207,8 +217,8 @@ def rate(request,post_id,rated):
 
       rater.save()
       project.save() 
-
-      return redirect('single_post',project.id)
+      data={'success': 'You have successfully Rated this post! Rates update on Page reload..'}
+      return JsonResponse(data)
   
 @login_required(login_url='/accounts/login/')  
 def search(request):

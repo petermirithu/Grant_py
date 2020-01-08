@@ -20,7 +20,7 @@
       <span style="border:4px solid blue;" class="dot">Design: {{rate_desi|floatformat:1}}%</span> <span style="border:4px solid orange;"class="dot">Usability: {{rate_usabi|floatformat:1}}%</span> <span style="border:4px solid red;" class="dot">Content: {{rate_conte|floatformat:1}}%</span> <span style="border:4px solid violet;"class="dot">Grand Total:{{post.total}}</span>      
       <a style="display:block" id="show" onclick="myFunction()" class="btn btn-info">Rate</a>
       <hr>      
-      <form style="box-shadow: 3px 3px 3px 3px black; display:none" id="rate"  action="/rate/{{post.id}}/0" method="post" enctype="mulitpart/form-data">
+      <form style="box-shadow: 3px 3px 3px 3px black; display:none" id="rate"  action="/rate/" method='post' enctype="multipart/form-data">
         {% csrf_token %}
         <p>Design:</p>
           <input type="radio" name="design" value="1">1
@@ -34,6 +34,7 @@
           <input type="radio" name="design" value="9">9
           <input type="radio" name="design" value="10">10  
 
+          <input type="text" style="visibility:hidden" name="postID" id="postID" value="{{post.id}}">
         <p>Usability:</p>
           <input type="radio" name="usability" value="1">1
           <input type="radio" name="usability" value="2">2
@@ -46,6 +47,7 @@
           <input type="radio" name="usability" value="9">9
           <input type="radio" name="usability" value="10">10          
 
+          <input type="text" style="visibility:hidden" name="rated_true" id="rated_true" value='0'>
         <p>Content:</p>
           <input type="radio" name="content" value="1">1
           <input type="radio" name="content" value="2">2
@@ -101,9 +103,10 @@
   <h1><u>Reviews</u></h1>
   <div class="row">    
     <div class="col-md-4">      
-      <form id="review_form" action="/ajax/review/{{post.id}}" method="post" enctype="mulitpart/form-data">
+      <form id="form2" action="{% url 'add_review' %}" method='post' enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}      
+        <input type="text" style="visibility:hidden" name="post_id" id="post_id" value="{{post.id}}">
         <div class='form-group'>
           <input type="submit" class="btn btn-outline-danger" value="Post">
         </div>
@@ -112,6 +115,10 @@
       <h6 id="numb">{{reviews.count}} reviews available for the project.</h6>
     </div>
     <div class="col-md-8 content">
+      <div class="json_stuf">
+
+      </div>
+      <br>
       {% if reviews %}      
       {% for review in reviews %}
         <div class="card" style="width:650px">     
@@ -145,8 +152,7 @@
 
 {% block scripts %}
   {{block.super}}  
-  <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/rate.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/reviews.js' %}"></script>  
 {% endblock scripts %}
 
   
