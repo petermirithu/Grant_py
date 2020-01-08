@@ -1,10 +1,10 @@
-# [Grant_py]()
+# [Grant_py](https://grantpy254.herokuapp.com/)
 
 This project was generated with [Django](https://www.djangoproject.com) version 2.2.8 <br>
 
 ![picture](grant_py.png)
 
-To view the site Click [Grant_py]()
+To view the site Click [Grant_py](https://grantpy254.herokuapp.com/)
 
 ## Author: 
   * [Peter Mirithu](https://github.com/petermirithu/Grant_py)
