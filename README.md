@@ -2,7 +2,7 @@
 
 This project was generated with [Django](https://www.djangoproject.com) version 2.2.8 <br>
 
-![picture]()
+![picture](grant_py.png)
 
 To view the site Click [Grant_py]()
 
