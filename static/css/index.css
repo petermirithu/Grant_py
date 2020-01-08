@@ -29,6 +29,7 @@
   right: 15%;    
   border-radius: 20px;
   border: 2px solid black;
+  color: lightblue;
   transition: all .5s ease-Out;
 }
 #content:hover{  
