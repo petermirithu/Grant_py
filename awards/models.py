@@ -71,7 +71,7 @@ class projo_post(models.Model):
     '''
     function that gets a single post
     '''
-    post=cls.objects.get(pk=post_id)
+    post=cls.objects.get(id=post_id)
     return post
 
   @classmethod
@@ -122,6 +122,9 @@ class reviews(models.Model):
   posted_by=models.ForeignKey(User, on_delete=models.CASCADE)
   posted_on=models.DateTimeField(auto_now_add=True)
 
+  class Meta:    
+    get_latest_by = 'posted_on'
+
   def __str__(self):
       return self.body
 
@@ -130,8 +133,15 @@ class reviews(models.Model):
     '''
     function that gets all reviews related to a project
     '''
-    reviews=cls.objects.filter(projo_id__id__contains=projo_id)
+    reviews=cls.objects.filter(projo_id__id__contains=projo_id).order_by('-id')
     return reviews
+  @classmethod
+  def get_review_latest(cls):
+    '''
+    fucntion that gets latest review
+    '''
+    posted_review=cls.objects.latest()
+    return posted_review
 
 
   
