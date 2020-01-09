@@ -4,7 +4,7 @@
 }
 #link {
   position: absolute;
-  top: 75%;
+  top: 80%;
   left: 5%;
   display: inline-flex;  
   border-radius: 20px;
@@ -19,12 +19,12 @@
 }
 #winner {
   position: absolute;
-  top: 25%;
+  top: 35%;
   left: 5%;  
 }
 #content {
   position: absolute;
-  top: 75%;
+  top: 80%;
   font-weight: bold;
   right: 15%;    
   border-radius: 20px;
@@ -40,7 +40,7 @@
 }
 #title {
   position: absolute;
-  top: 35%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
@@ -162,3 +162,273 @@
   to {transform:scale(1)}
 }
 
+/* media queries */
+@media screen and (max-device-width:1288px){  
+  #rate {
+    position: absolute;
+    top: 300px!important;
+    left: 660px!important;
+    transform: translate(-50%, -50%);
+  }
+  #link {
+    position: absolute;
+    top: 75%!important;
+    left: 5%!important;
+    display: inline-flex;  
+    border-radius: 20px;
+    background-color: rgb(206, 10, 75);
+    color: black;
+    transition: all .5s ease-Out;
+  }
+  #winner {
+    position: absolute;
+    top: 20%!important;
+    left: 5%!important;  
+  }
+  #content {
+    position: absolute;
+    top: 75%!important;
+    font-weight: bold;
+    right: 5%!important;    
+    border-radius: 20px;
+    border: 2px solid black;
+    color: lightblue;
+    transition: all .5s ease-Out;
+  }
+  #title {
+    position: absolute;
+    top: 30%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: azure;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;  
+    transition: all .8s ease-Out; 
+  }
+}
+
+@media screen and (max-device-width:1270px){  
+  #rate {
+    position: absolute;
+    top: 350px!important;
+    left: 660px!important;
+    transform: translate(-50%, -50%);
+  }
+  #link {
+    position: absolute;
+    top: 60%!important;
+    left: 5%!important;
+    display: inline-flex;  
+    border-radius: 20px;
+    background-color: rgb(206, 10, 75);
+    color: black;
+    transition: all .5s ease-Out;
+  }
+  #winner {
+    position: absolute;
+    top: 17%!important;
+    left: 5%!important;  
+  }
+  #content {
+    position: absolute;
+    top: 60%!important;
+    font-weight: bold;
+    right: 5%!important;    
+    border-radius: 20px;
+    border: 2px solid black;
+    color: lightblue;
+    transition: all .5s ease-Out;
+  }
+  #title {
+    position: absolute;
+    top: 24%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: azure;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;  
+    transition: all .8s ease-Out; 
+  }
+}
+
+@media screen and (max-device-width:1024px){  
+  #rate {
+    position: absolute;
+    top: 350px!important;
+    left: 400px!important;
+    transform: translate(-50%, -50%);
+  }
+  #link {
+    position: absolute;
+    top: 35%!important;
+    left: 5%!important;
+    display: inline-flex;  
+    border-radius: 20px;
+    background-color: rgb(206, 10, 75);
+    color: black;
+    transition: all .5s ease-Out;
+  }
+  #winner {
+    position: absolute;
+    top: 12%!important;
+    left: 5%!important;  
+  }
+  #content {
+    position: absolute;
+    top: 35%!important;
+    font-weight: bold;
+    right: 5%!important;    
+    border-radius: 20px;
+    border: 2px solid black;
+    color: lightblue;
+    transition: all .5s ease-Out;
+  }
+  #title {
+    position: absolute;
+    top: 17%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: azure;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;  
+    transition: all .8s ease-Out; 
+  }
+}
+
+@media screen and (max-device-width:550px){  
+  #rate {
+    position: absolute;
+    top: 340px!important;
+    left: 400px!important;
+    transform: translate(-50%, -50%);
+  }
+  #link {
+    position: absolute;
+    top: 25%!important;
+    left: 5%!important;
+    display: inline-flex;  
+    border-radius: 20px;
+    background-color: rgb(206, 10, 75);
+    color: black;
+    transition: all .5s ease-Out;
+  }
+  #winner {
+    position: absolute;
+    top: 8%!important;
+    left: 5%!important;  
+  }
+  #content {
+    position: absolute;
+    top: 25%!important;
+    font-weight: bold;
+    right: 5%!important;    
+    border-radius: 20px;
+    border: 2px solid black;
+    color: lightblue;
+    transition: all .5s ease-Out;
+  }
+  #title {
+    position: absolute;
+    top: 12%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: azure;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;  
+    transition: all .8s ease-Out; 
+  }
+}
+
+@media screen and (max-device-width:425px){  
+  #rate {
+    position: absolute;
+    top: 350px!important;
+    left: 400px!important;
+    transform: translate(-50%, -50%);
+  }
+  #link {
+    position: absolute;
+    top: 25%!important;
+    left: 5%!important;
+    display: inline-flex;  
+    border-radius: 20px;
+    background-color: rgb(206, 10, 75);
+    color: black;
+    transition: all .5s ease-Out;
+  }
+  #winner {
+    position: absolute;
+    top: 10%!important;
+    left: 5%!important;  
+  }
+  #content {
+    position: absolute;
+    top: 25%!important;
+    font-weight: bold;
+    right: 5%!important;    
+    border-radius: 20px;
+    border: 2px solid black;
+    color: lightblue;
+    transition: all .5s ease-Out;
+  }
+  #title {
+    position: absolute;
+    top: 15%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: azure;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;  
+    transition: all .8s ease-Out; 
+  }
+}
+
+@media screen and (max-device-width:380px){  
+  #rate {
+    position: absolute;
+    top: 340px!important;
+    left: 400px!important;
+    transform: translate(-50%, -50%);
+  }
+  #link {
+    position: absolute;
+    top: 21%!important;
+    left: 5%!important;
+    display: inline-flex;  
+    border-radius: 20px;
+    background-color: rgb(206, 10, 75);
+    color: black;
+    transition: all .5s ease-Out;
+  }
+  #winner {
+    position: absolute;
+    top: 8%!important;
+    left: 5%!important;  
+  }
+  #content {
+    position: absolute;
+    top: 21%!important;
+    font-weight: bold;
+    right: 5%!important;    
+    border-radius: 20px;
+    border: 2px solid black;
+    color: lightblue;
+    transition: all .5s ease-Out;
+  }
+  #title {
+    position: absolute;
+    top: 10%!important;
+    left: 50%!important;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    color: azure;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;  
+    transition: all .8s ease-Out; 
+  }
+}
