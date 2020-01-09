@@ -47,6 +47,10 @@ To view the site Click [Grant_py](https://grantpy254.herokuapp.com/)
 
   Displays the search form.                     ~when one clicks the search icon.
 
+  Display all profiles in Json Format           ~When one add this path "/api/profiles/" after the sites home page url.
+
+  Display all projects in Json Format           ~When one add this path "/api/projects/" after the sites home page url.
+
   Logs out a user.                              ~when the sign out button is clicked
   ```
 
